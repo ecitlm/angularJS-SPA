@@ -1,0 +1,13 @@
+<header>
+  <li> <a title="index" ui-sref="index">index</a></li>
+  <li><a title="page" ui-sref="page">news</a></li>
+  {{list}}
+</header>
+<script>
+  alert(1)
+  define(['app'], function (app) {
+    app.registerController('testCtrl', function ($scope) {
+      $scope.title = 'this is the news page'
+    })
+  })
+</script>
