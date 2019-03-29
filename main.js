@@ -5,7 +5,9 @@ require.config({
     'routes': './src/js/routes',
     'common': './src/js/common',
     'filters': './src/js/filters',
-    'app': './app'
+    'app': './app',
+    'axios': './src/js/lib/axios.min',
+    '$api': './src/js/http'
   },
   waitSeconds: 0,
   shim: {
@@ -25,7 +27,7 @@ require.config({
   priority: [
     'angular'
   ],
-  urlArgs: 'version=2190328'
+  urlArgs: 'version=219039'
 })
 
 require(['angular',
@@ -33,7 +35,8 @@ require(['angular',
   'app',
   'routes',
   'common',
-  'filters'
-], function (angular, filters) {
+  'filters',
+  '$api'
+], function (angular, filters, $api) {
   angular.bootstrap(document, ['app'])
 })

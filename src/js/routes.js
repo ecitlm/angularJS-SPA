@@ -28,8 +28,14 @@ define(['app'], function (app) {
           }
         }
       }
-    })
-    $stateProvider.state('page', {
+    }).state('mine', {
+      url: '/mine',
+      templateUrl: '../../views/tpls/mine.html',
+      controller: 'ctrl.mine',
+      resolve: {
+        deps: app.loadJs('../../views/tpls/mine')
+      }
+    }).state('page', {
       url: '/page',
       templateUrl: '../../views/tpls/news.html',
       controller: 'ctrl.page',
