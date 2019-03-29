@@ -20,7 +20,13 @@ define(['app'], function (app) {
       templateUrl: '../../views/tpls/index.html',
       controller: 'ctrl.index',
       resolve: {
-        deps: app.loadJs('../../views/tpls/index')
+        deps: app.loadJs('../../views/tpls/index'),
+        params: function () {
+          return {
+            name: 'ecitlm',
+            job: 'web developer'
+          }
+        }
       }
     })
     $stateProvider.state('page', {

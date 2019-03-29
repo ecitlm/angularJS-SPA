@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-size: 16px;
+  list-style: none
+}
+
+.nav {
+  display: flex;
+  flex: 1;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.nav li {
+  flex: 1;
+  text-align: center;
+}
+
+.nav li a {
+  display: block;
+  padding: 10px 0;
+  font-size: 18px;
+  color: #333333
+}
+
+.nav li a.active {
+  color: blue
+}

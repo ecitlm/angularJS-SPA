@@ -9,33 +9,53 @@
 
 var requirejs, require, define;
 (function (global, setTimeout) {
-  var req, s, head, baseElement, dataMain, src,
-    interactiveScript, currentlyAddingScript, mainScript, subPath,
-    version = '2.3.6',
-    commentRegExp = /\/\*[\s\S]*?\*\/|([^:"'=]|^)\/\/.*$/mg,
-    cjsRequireRegExp = /[^.]\s*require\s*\(\s*["']([^'"\s]+)["']\s*\)/g,
-    jsSuffixRegExp = /\.js$/,
-    currDirRegExp = /^\.\//,
-    op = Object.prototype,
-    ostring = op.toString,
-    hasOwn = op.hasOwnProperty,
-    isBrowser = !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document),
-    isWebWorker = !isBrowser && typeof importScripts !== 'undefined',
-    // PS3 indicates loaded and complete, but need to wait for complete
-    // specifically. Sequence is 'loading', 'loaded', execution,
-    // then 'complete'. The UA check is unfortunate, but not sure how
-    // to feature test w/o causing perf issues.
-    readyRegExp = isBrowser && navigator.platform === 'PLAYSTATION 3'
-      ? /^complete$/ : /^(complete|loaded)$/,
-    defContextName = '_',
-    // Oh the tragedy, detecting opera. See the usage of isOpera for reason.
-    isOpera = typeof opera !== 'undefined' && opera.toString() === '[object Opera]',
-    contexts = {},
-    cfg = {},
-    globalDefQueue = [],
-    useInteractive = false
+  var req; var s; var head; var baseElement; var dataMain; var src
 
-    // Could match something like ')//comment', do not lose the prefix to comment.
+  var interactiveScript; var currentlyAddingScript; var mainScript; var subPath
+
+  var version = '2.3.6'
+
+  var commentRegExp = /\/\*[\s\S]*?\*\/|([^:"'=]|^)\/\/.*$/mg
+
+  var cjsRequireRegExp = /[^.]\s*require\s*\(\s*["']([^'"\s]+)["']\s*\)/g
+
+  var jsSuffixRegExp = /\.js$/
+
+  var currDirRegExp = /^\.\//
+
+  var op = Object.prototype
+
+  var ostring = op.toString
+
+  var hasOwn = op.hasOwnProperty
+
+  var isBrowser = !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document)
+
+  var isWebWorker = !isBrowser && typeof importScripts !== 'undefined'
+
+  // PS3 indicates loaded and complete, but need to wait for complete
+  // specifically. Sequence is 'loading', 'loaded', execution,
+  // then 'complete'. The UA check is unfortunate, but not sure how
+  // to feature test w/o causing perf issues.
+
+  var readyRegExp = isBrowser && navigator.platform === 'PLAYSTATION 3'
+    ? /^complete$/ : /^(complete|loaded)$/
+
+  var defContextName = '_'
+
+  // Oh the tragedy, detecting opera. See the usage of isOpera for reason.
+
+  var isOpera = typeof opera !== 'undefined' && opera.toString() === '[object Opera]'
+
+  var contexts = {}
+
+  var cfg = {}
+
+  var globalDefQueue = []
+
+  var useInteractive = false
+
+  // Could match something like ')//comment', do not lose the prefix to comment.
   function commentReplace (match, singlePrefix) {
     return singlePrefix || ''
   }
@@ -196,32 +216,44 @@ var requirejs, require, define;
   }
 
   function newContext (contextName) {
-    var inCheckLoaded, Module, context, handlers,
-      checkLoadedTimeoutId,
-      config = {
-        // Defaults. Do not set a default for map
-        // config to speed up normalize(), which
-        // will run faster if there is no default.
-        waitSeconds: 7,
-        baseUrl: './',
-        paths: {},
-        bundles: {},
-        pkgs: {},
-        shim: {},
-        config: {}
-      },
-      registry = {},
-      // registry of just enabled modules, to speed
-      // cycle breaking code when lots of modules
-      // are registered, but not activated.
-      enabledRegistry = {},
-      undefEvents = {},
-      defQueue = [],
-      defined = {},
-      urlFetched = {},
-      bundlesMap = {},
-      requireCounter = 1,
-      unnormalizedCounter = 1
+    var inCheckLoaded; var Module; var context; var handlers
+
+    var checkLoadedTimeoutId
+
+    var config = {
+      // Defaults. Do not set a default for map
+      // config to speed up normalize(), which
+      // will run faster if there is no default.
+      waitSeconds: 7,
+      baseUrl: './',
+      paths: {},
+      bundles: {},
+      pkgs: {},
+      shim: {},
+      config: {}
+    }
+
+    var registry = {}
+
+    // registry of just enabled modules, to speed
+    // cycle breaking code when lots of modules
+    // are registered, but not activated.
+
+    var enabledRegistry = {}
+
+    var undefEvents = {}
+
+    var defQueue = []
+
+    var defined = {}
+
+    var urlFetched = {}
+
+    var bundlesMap = {}
+
+    var requireCounter = 1
+
+    var unnormalizedCounter = 1
 
     /**
          * Trims the . and .. from an array of path segments.
@@ -266,11 +298,15 @@ var requirejs, require, define;
          * @returns {String} normalized name
          */
     function normalize (name, baseName, applyMap) {
-      var pkgMain, mapValue, nameParts, i, j, nameSegment, lastIndex,
-        foundMap, foundI, foundStarMap, starI, normalizedBaseParts,
-        baseParts = (baseName && baseName.split('/')),
-        map = config.map,
-        starMap = map && map['*']
+      var pkgMain; var mapValue; var nameParts; var i; var j; var nameSegment; var lastIndex
+
+      var foundMap; var foundI; var foundStarMap; var starI; var normalizedBaseParts
+
+      var baseParts = (baseName && baseName.split('/'))
+
+      var map = config.map
+
+      var starMap = map && map['*']
 
       // Adjust any relative paths.
       if (name) {
@@ -388,8 +424,9 @@ var requirejs, require, define;
     // with the plugin being undefined if the name
     // did not have a plugin prefix.
     function splitPrefix (name) {
-      var prefix,
-        index = name ? name.indexOf('!') : -1
+      var prefix
+
+      var index = name ? name.indexOf('!') : -1
       if (index > -1) {
         prefix = name.substring(0, index)
         name = name.substring(index + 1, name.length)
@@ -413,12 +450,17 @@ var requirejs, require, define;
          * @returns {Object}
          */
     function makeModuleMap (name, parentModuleMap, isNormalized, applyMap) {
-      var url, pluginModule, suffix, nameParts,
-        prefix = null,
-        parentName = parentModuleMap ? parentModuleMap.name : null,
-        originalName = name,
-        isDefine = true,
-        normalizedName = ''
+      var url; var pluginModule; var suffix; var nameParts
+
+      var prefix = null
+
+      var parentName = parentModuleMap ? parentModuleMap.name : null
+
+      var originalName = name
+
+      var isDefine = true
+
+      var normalizedName = ''
 
       // If no name, then it means it is a require call, generate an
       // internal name.
@@ -496,8 +538,9 @@ var requirejs, require, define;
     }
 
     function getModule (depMap) {
-      var id = depMap.id,
-        mod = getOwn(registry, id)
+      var id = depMap.id
+
+      var mod = getOwn(registry, id)
 
       if (!mod) {
         mod = registry[id] = new context.Module(depMap)
@@ -507,8 +550,9 @@ var requirejs, require, define;
     }
 
     function on (depMap, name, fn) {
-      var id = depMap.id,
-        mod = getOwn(registry, id)
+      var id = depMap.id
+
+      var mod = getOwn(registry, id)
 
       if (hasProp(defined, id) &&
                     (!mod || mod.defineEmitComplete)) {
@@ -526,8 +570,9 @@ var requirejs, require, define;
     }
 
     function onError (err, errback) {
-      var ids = err.requireModules,
-        notified = false
+      var ids = err.requireModules
+
+      var notified = false
 
       if (errback) {
         errback(err)
@@ -616,8 +661,9 @@ var requirejs, require, define;
       } else {
         traced[id] = true
         each(mod.depMaps, function (depMap, i) {
-          var depId = depMap.id,
-            dep = getOwn(registry, depId)
+          var depId = depMap.id
+
+          var dep = getOwn(registry, depId)
 
           // Only force things that have not completed
           // being defined, so still in the registry,
@@ -637,14 +683,21 @@ var requirejs, require, define;
     }
 
     function checkLoaded () {
-      var err, usingPathFallback,
-        waitInterval = config.waitSeconds * 1000,
-        // It is possible to disable the wait interval by using waitSeconds of 0.
-        expired = waitInterval && (context.startTime + waitInterval) < new Date().getTime(),
-        noLoads = [],
-        reqCalls = [],
-        stillLoading = false,
-        needCycleCheck = true
+      var err; var usingPathFallback
+
+      var waitInterval = config.waitSeconds * 1000
+
+      // It is possible to disable the wait interval by using waitSeconds of 0.
+
+      var expired = waitInterval && (context.startTime + waitInterval) < new Date().getTime()
+
+      var noLoads = []
+
+      var reqCalls = []
+
+      var stillLoading = false
+
+      var needCycleCheck = true
 
       // Do not bother if this call was a result of a cycle break.
       if (inCheckLoaded) {
@@ -655,8 +708,9 @@ var requirejs, require, define;
 
       // Figure out the state of all the modules.
       eachProp(enabledRegistry, function (mod) {
-        var map = mod.map,
-          modId = map.id
+        var map = mod.map
+
+        var modId = map.id
 
         // Skip things that are not enabled or in error state.
         if (!mod.enabled) {
@@ -843,11 +897,15 @@ var requirejs, require, define;
           return
         }
 
-        var err, cjsModule,
-          id = this.map.id,
-          depExports = this.depExports,
-          exports = this.exports,
-          factory = this.factory
+        var err; var cjsModule
+
+        var id = this.map.id
+
+        var depExports = this.depExports
+
+        var exports = this.exports
+
+        var factory = this.factory
 
         if (!this.inited) {
           // Only fetch if not already in the defQueue.
@@ -940,23 +998,30 @@ var requirejs, require, define;
       },
 
       callPlugin: function () {
-        var map = this.map,
-          id = map.id,
-          // Map already normalized the prefix.
-          pluginMap = makeModuleMap(map.prefix)
+        var map = this.map
+
+        var id = map.id
+
+        // Map already normalized the prefix.
+
+        var pluginMap = makeModuleMap(map.prefix)
 
         // Mark this as a dependency for this plugin, so it
         // can be traced for cycles.
         this.depMaps.push(pluginMap)
 
         on(pluginMap, 'defined', bind(this, function (plugin) {
-          var load, normalizedMap, normalizedMod,
-            bundleId = getOwn(bundlesMap, this.map.id),
-            name = this.map.name,
-            parentName = this.map.parentMap ? this.map.parentMap.name : null,
-            localRequire = context.makeRequire(map.parentMap, {
-              enableBuildCallback: true
-            })
+          var load; var normalizedMap; var normalizedMod
+
+          var bundleId = getOwn(bundlesMap, this.map.id)
+
+          var name = this.map.name
+
+          var parentName = this.map.parentMap ? this.map.parentMap.name : null
+
+          var localRequire = context.makeRequire(map.parentMap, {
+            enableBuildCallback: true
+          })
 
           // If current map is not normalized, wait for that
           // normalized name to load instead of continuing.
@@ -1033,9 +1098,11 @@ var requirejs, require, define;
           // context or how to 'complete' the load.
           load.fromText = bind(this, function (text, textAlt) {
             /* jslint evil: true */
-            var moduleName = map.name,
-              moduleMap = makeModuleMap(moduleName),
-              hasInteractive = useInteractive
+            var moduleName = map.name
+
+            var moduleMap = makeModuleMap(moduleName)
+
+            var hasInteractive = useInteractive
 
             // As of 2.1.0, support just passing the text, to reinforce
             // fromText only being called once per resource. Still
@@ -1294,13 +1361,14 @@ var requirejs, require, define;
 
         // Save off the paths since they require special processing,
         // they are additive.
-        var shim = config.shim,
-          objs = {
-            paths: true,
-            bundles: true,
-            config: true,
-            map: true
-          }
+        var shim = config.shim
+
+        var objs = {
+          paths: true,
+          bundles: true,
+          config: true,
+          map: true
+        }
 
         eachProp(cfg, function (value, prop) {
           if (objs[prop]) {
@@ -1346,7 +1414,7 @@ var requirejs, require, define;
           each(cfg.packages, function (pkgObj) {
             var location, name
 
-            pkgObj = typeof pkgObj === 'string' ? {name: pkgObj} : pkgObj
+            pkgObj = typeof pkgObj === 'string' ? { name: pkgObj } : pkgObj
 
             name = pkgObj.name
             location = pkgObj.location
@@ -1473,10 +1541,13 @@ var requirejs, require, define;
                      * plain URLs like nameToUrl.
                      */
           toUrl: function (moduleNamePlusExt) {
-            var ext,
-              index = moduleNamePlusExt.lastIndexOf('.'),
-              segment = moduleNamePlusExt.split('/')[0],
-              isRelative = segment === '.' || segment === '..'
+            var ext
+
+            var index = moduleNamePlusExt.lastIndexOf('.')
+
+            var segment = moduleNamePlusExt.split('/')[0]
+
+            var isRelative = segment === '.' || segment === '..'
 
             // Have a file extension alias, and it is not the
             // dots from a relative path.
@@ -1506,8 +1577,9 @@ var requirejs, require, define;
             // fix for #408
             takeGlobalQueue()
 
-            var map = makeModuleMap(id, relMap, true),
-              mod = getOwn(registry, id)
+            var map = makeModuleMap(id, relMap, true)
+
+            var mod = getOwn(registry, id)
 
             mod.undefed = true
             removeScript(id)
@@ -1562,9 +1634,11 @@ var requirejs, require, define;
              * @param {String} moduleName the name of the module to potentially complete.
              */
       completeLoad: function (moduleName) {
-        var found, args, mod,
-          shim = getOwn(config.shim, moduleName) || {},
-          shExports = shim.exports
+        var found; var args; var mod
+
+        var shim = getOwn(config.shim, moduleName) || {}
+
+        var shExports = shim.exports
 
         takeGlobalQueue()
 
@@ -1620,9 +1694,11 @@ var requirejs, require, define;
              * internal API, not a public one. Use toUrl for the public API.
              */
       nameToUrl: function (moduleName, ext, skipExt) {
-        var paths, syms, i, parentModule, url,
-          parentPath, bundleId,
-          pkgMain = getOwn(config.pkgs, moduleName)
+        var paths; var syms; var i; var parentModule; var url
+
+        var parentPath; var bundleId
+
+        var pkgMain = getOwn(config.pkgs, moduleName)
 
         if (pkgMain) {
           moduleName = pkgMain
@@ -1760,8 +1836,9 @@ var requirejs, require, define;
      */
   req = requirejs = function (deps, callback, errback, optional) {
     // Find the right context, use default
-    var context, config,
-      contextName = defContextName
+    var context; var config
+
+    var contextName = defContextName
 
     // Determine if have config object in the call.
     if (!isArray(deps) && typeof deps !== 'string') {
@@ -1888,8 +1965,9 @@ var requirejs, require, define;
      * @param {Object} url the URL to the module.
      */
   req.load = function (context, moduleName, url) {
-    var config = (context && context.config) || {},
-      node
+    var config = (context && context.config) || {}
+
+    var node
     if (isBrowser) {
       // In the browser so use a script tag
       node = req.createNode(config, moduleName, url)

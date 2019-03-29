@@ -1,13 +1,5 @@
-<header>
-  <li> <a title="index" ui-sref="index">index</a></li>
-  <li><a title="page" ui-sref="page">news</a></li>
-  {{list}}
-</header>
-<script>
-  alert(1)
-  define(['app'], function (app) {
-    app.registerController('testCtrl', function ($scope) {
-      $scope.title = 'this is the news page'
-    })
-  })
-</script>
+<ul class="nav">
+  <li> <a title="index" ui-sref="index" ng-class="{1:'active'}[list.active]">index</a></li>
+  <li><a title="page" ui-sref="page " ng-class="{2:'active'}[list.active]">news</a></li>
+  <li><a title="page" ui-sref="mine" ng-class="{3:'active'}[list.active]">news{{list.active}}</a></li>
+</ul>

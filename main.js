@@ -4,7 +4,8 @@ require.config({
     'uiRoute': './src/js/lib/angular-ui-router',
     'routes': './src/js/routes',
     'common': './src/js/common',
-    'filters': './src/js/filters'
+    'filters': './src/js/filters',
+    'app': './app'
   },
   waitSeconds: 0,
   shim: {
@@ -13,6 +14,9 @@ require.config({
     },
     'uiRoute': {
       deps: ['angular']
+    },
+    'routes': {
+      deps: ['uiRoute']
     },
     'common': {
       'exports': 'common'
@@ -25,12 +29,11 @@ require.config({
 })
 
 require(['angular',
+  'uiRoute',
   'app',
   'routes',
-  'uiRoute',
   'common',
   'filters'
-], function (angular) {
-  // angular.bootstrap(document, ['app'])
-  // angular.module('app', ['ui.router'])
+], function (angular, filters) {
+  angular.bootstrap(document, ['app'])
 })

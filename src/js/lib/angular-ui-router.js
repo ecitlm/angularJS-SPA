@@ -90,7 +90,7 @@
     var args = arguments
     var start = args.length - 1
     return function () {
-      var i = start, result = args[start].apply(this, arguments)
+      var i = start; var result = args[start].apply(this, arguments)
       while (i--) { result = args[i].call(this, result) }
       return result
     }
@@ -269,7 +269,7 @@
      */
   function isInjectable (val$$1) {
     if (isArray(val$$1) && val$$1.length) {
-      var head = val$$1.slice(0, -1), tail = val$$1.slice(-1)
+      var head = val$$1.slice(0, -1); var tail = val$$1.slice(-1)
       return !(head.filter(not(isString)).length || tail.filter(not(isFunction)).length)
     }
     return isFunction(val$$1)
@@ -493,7 +493,7 @@
   }
   /** Filters an Array or an Object's properties based on a predicate */
   function filter (collection, callback) {
-    var arr = isArray(collection), result = arr ? [] : {}
+    var arr = isArray(collection); var result = arr ? [] : {}
     var accept = arr ? function (x) { return result.push(x) } : function (x, key) { return (result[key] = x) }
     forEach(collection, function (item, i) {
       if (callback(item, i)) { accept(item, i) }
@@ -769,7 +769,7 @@
     if (o1 === o2) { return true }
     if (o1 === null || o2 === null) { return false }
     if (o1 !== o1 && o2 !== o2) { return true } // NaN === NaN
-    var t1 = typeof o1, t2 = typeof o2
+    var t1 = typeof o1; var t2 = typeof o2
     if (t1 !== t2 || t1 !== 'object') { return false }
     var tup = [o1, o2]
     if (all(isArray)(tup)) { return _arraysEq(o1, o2) }
@@ -919,7 +919,7 @@
     return Queue
   }());
 
-    /** @publicapi @module transition */ /** */
+  /** @publicapi @module transition */ /** */
 
   (function (RejectType) {
     /**
@@ -1021,7 +1021,7 @@
     Rejection.prototype.toString = function () {
       var detailString = function (d) { return (d && d.toString !== Object.prototype.toString ? d.toString() : stringify(d)) }
       var detail = detailString(this.detail)
-      var _a = this, $id = _a.$id, type = _a.type, message = _a.message
+      var _a = this; var $id = _a.$id; var type = _a.type; var message = _a.message
       return 'Transition Rejection($id: ' + $id + ' type: ' + type + ', message: ' + message + ', detail: ' + detail + ')'
     }
     Rejection.prototype.toPromise = function () {
@@ -1299,7 +1299,7 @@
     /** @internalapi called by ui-router code */
     Trace.prototype.traceHookInvocation = function (step, trans, options) {
       if (!this.enabled(exports.Category.HOOK)) { return }
-      var event = parse('traceData.hookType')(options) || 'internal', context = parse('traceData.context.state.name')(options) || parse('traceData.context')(options) || 'unknown', name = functionToString(step.registeredHook.callback)
+      var event = parse('traceData.hookType')(options) || 'internal'; var context = parse('traceData.context.state.name')(options) || parse('traceData.context')(options) || 'unknown'; var name = functionToString(step.registeredHook.callback)
       console.log(transLbl(trans) + ':   Hook -> ' + event + ' context: ' + context + ', ' + maxLength(200, name))
     }
     /** @internalapi called by ui-router code */
@@ -1350,7 +1350,7 @@
       var cfgheader = 'view config state (view name)'
       var mapping = pairs
         .map(function (_a) {
-          var uiView = _a.uiView, viewConfig = _a.viewConfig
+          var uiView = _a.uiView; var viewConfig = _a.viewConfig
           var _b
           var uiv = uiView && uiView.fqn
           var cfg = viewConfig && viewConfig.viewDecl.$context.name + ': (' + viewConfig.viewDecl.$name + ')'
@@ -1501,7 +1501,7 @@
     // Wraps type (.equals) functions to operate on each value of an array
     function arrayEqualsHandler (callback) {
       return function handleArray (val1, val2) {
-        var left = arrayWrap(val1), right = arrayWrap(val2)
+        var left = arrayWrap(val1); var right = arrayWrap(val2)
         if (left.length !== right.length) { return false }
         for (var i = 0; i < left.length; i++) {
           if (!callback(left[i], right[i])) { return false }
@@ -1878,7 +1878,7 @@
          */
     StateParams.prototype.$inherit = function (newParams, $current, $to) {
       var parentParams
-      var parents = ancestors($current, $to), inherited = {}, inheritList = []
+      var parents = ancestors($current, $to); var inherited = {}; var inheritList = []
       for (var i in parents) {
         if (!parents[i] || !parents[i].params) { continue }
         parentParams = Object.keys(parents[i].params)
@@ -2226,7 +2226,7 @@
       var done = false
       var tuples = arrayTuples(pathA, pathB)
       return tuples.reduce(function (matching, _a) {
-        var nodeA = _a[0], nodeB = _a[1]
+        var nodeA = _a[0]; var nodeB = _a[1]
         done = done || !nodeA.equals(nodeB, paramsFn)
         return done ? matching : matching.concat(nodeA)
       }, [])
@@ -2825,7 +2825,7 @@
          * @returns the built State object
          */
     StateBuilder.prototype.build = function (state) {
-      var _a = this, matcher = _a.matcher, builders = _a.builders
+      var _a = this; var matcher = _a.matcher; var builders = _a.builders
       var parent = this.parentName(state)
       if (parent && !matcher.find(parent, undefined, false)) {
         return null
@@ -3004,7 +3004,7 @@
       var baseState = this.find(base)
       var splitName = name.split('.')
       var pathLength = splitName.length
-      var i = 0, current = baseState
+      var i = 0; var current = baseState
       for (; i < pathLength; i++) {
         if (splitName[i] === '' && i === 0) {
           current = baseState
@@ -3049,10 +3049,14 @@
     }
     StateQueueManager.prototype.flush = function () {
       var _this = this
-      var _a = this, queue = _a.queue, states = _a.states, builder = _a.builder
-      var registered = [], // states that got registered
-        orphans = [], // states that don't yet have a parent registered
-        previousQueueLength = {} // keep track of how long the queue when an orphan was first encountered
+      var _a = this; var queue = _a.queue; var states = _a.states; var builder = _a.builder
+      var registered = []
+      // states that got registered
+
+      var orphans = []
+      // states that don't yet have a parent registered
+
+      var previousQueueLength = {} // keep track of how long the queue when an orphan was first encountered
       var getState = function (name) { return _this.states.hasOwnProperty(name) && _this.states[name] }
       var notifyListeners = function () {
         if (registered.length) {
@@ -3415,8 +3419,8 @@
       }
     }
     TransitionHook.prototype.toString = function () {
-      var _a = this, options = _a.options, registeredHook = _a.registeredHook
-      var event = parse('traceData.hookType')(options) || 'internal', context = parse('traceData.context.state.name')(options) || parse('traceData.context')(options) || 'unknown', name = fnToString(registeredHook.callback)
+      var _a = this; var options = _a.options; var registeredHook = _a.registeredHook
+      var event = parse('traceData.hookType')(options) || 'internal'; var context = parse('traceData.context.state.name')(options) || parse('traceData.context')(options) || 'unknown'; var name = fnToString(registeredHook.callback)
       return event + ' context: ' + context + ', ' + maxLength(200, name)
     }
     /**
@@ -4151,7 +4155,7 @@
          * @returns Returns a new [[Transition]] instance.
          */
     Transition.prototype.redirect = function (targetState) {
-      var redirects = 1, trans = this
+      var redirects = 1; var trans = this
       // tslint:disable-next-line:no-conditional-assignment
       while ((trans = trans.redirectedFrom()) != null) {
         if (++redirects > 20) { throw new Error('Too many consecutive Transition redirects (20+)') }
@@ -4208,10 +4212,10 @@
       if (pathsDiffer) { return undefined }
       // Find any parameter values that differ
       var nodeSchemas = tc.to.map(function (node) { return node.paramSchema })
-      var _a = [tc.to, tc.from].map(function (path) { return path.map(function (x) { return x.paramValues }) }), toValues = _a[0], fromValues = _a[1]
+      var _a = [tc.to, tc.from].map(function (path) { return path.map(function (x) { return x.paramValues }) }); var toValues = _a[0]; var fromValues = _a[1]
       var tuples = arrayTuples(nodeSchemas, toValues, fromValues)
       return tuples.map(function (_a) {
-        var schema = _a[0], toVals = _a[1], fromVals = _a[2]
+        var schema = _a[0]; var toVals = _a[1]; var fromVals = _a[2]
         return Param.changed(schema, toVals, fromVals)
       }).reduce(unnestR, [])
     }
@@ -4354,7 +4358,7 @@
         return params['#'] !== null && params['#'] !== undefined ? params : omit(params, ['#'])
       }
       // (X) means the to state is invalid.
-      var id = this.$id, from = isObject(fromStateOrName) ? fromStateOrName.name : fromStateOrName, fromParams = stringify(avoidEmptyHash(this._treeChanges.from.map(prop('paramValues')).reduce(mergeR, {}))), toValid = this.valid() ? '' : '(X) ', to = isObject(toStateOrName) ? toStateOrName.name : toStateOrName, toParams = stringify(avoidEmptyHash(this.params()))
+      var id = this.$id; var from = isObject(fromStateOrName) ? fromStateOrName.name : fromStateOrName; var fromParams = stringify(avoidEmptyHash(this._treeChanges.from.map(prop('paramValues')).reduce(mergeR, {}))); var toValid = this.valid() ? '' : '(X) '; var to = isObject(toStateOrName) ? toStateOrName.name : toStateOrName; var toParams = stringify(avoidEmptyHash(this.params()))
       return 'Transition#' + id + "( '" + from + "'" + fromParams + ' -> ' + toValid + "'" + to + "'" + toParams + ' )'
     }
     /** @hidden */
@@ -4365,7 +4369,7 @@
   /** @publicapi @module url */ /** */
   /** @hidden */
   function quoteRegExp (str, param) {
-    var surroundPattern = ['', ''], result = str.replace(/[\\\[\]\^$*+?.()|{}]/g, '\\$&')
+    var surroundPattern = ['', '']; var result = str.replace(/[\\\[\]\^$*+?.()|{}]/g, '\\$&')
     if (!param) { return result }
     switch (param.squash) {
       case false:
@@ -4611,7 +4615,7 @@
         while (l.length < len) { l.push(padVal) }
         while (r.length < len) { r.push(padVal) }
       }
-      var weightsA = weights(a), weightsB = weights(b)
+      var weightsA = weights(a); var weightsB = weights(b)
       padArrays(weightsA, weightsB, 0)
       var _pairs = arrayTuples(weightsA, weightsB)
       var cmp, i
@@ -4685,7 +4689,7 @@
       }).exec(path)
       if (!match) { return null }
       // options = defaults(options, { isolate: false });
-      var allParams = this.parameters(), pathParams = allParams.filter(function (param) { return !param.isSearch() }), searchParams = allParams.filter(function (param) { return param.isSearch() }), nPathSegments = this._cache.path.map(function (urlm) { return urlm._segments.length - 1 }).reduce(function (a, x) { return a + x }), values$$1 = {}
+      var allParams = this.parameters(); var pathParams = allParams.filter(function (param) { return !param.isSearch() }); var searchParams = allParams.filter(function (param) { return param.isSearch() }); var nPathSegments = this._cache.path.map(function (urlm) { return urlm._segments.length - 1 }).reduce(function (a, x) { return a + x }); var values$$1 = {}
       if (nPathSegments !== match.length - 1) { throw new Error("Unbalanced capture group in route '" + this.pattern + "'") }
       function decodePathArray (paramVal) {
         var reverseString = function (str) {
@@ -4822,7 +4826,7 @@
         // The element is a static segment (a raw string); just append it
         if (isString(x)) { return acc + x }
         // Otherwise, it's a ParamDetails.
-        var squash = x.squash, encoded = x.encoded, param = x.param
+        var squash = x.squash; var encoded = x.encoded; var param = x.param
         // If squash is === true, try to remove a slash from the path
         if (squash === true) { return acc.match(/\/$/) ? acc.slice(0, -1) : acc }
         // If squash is a string, use the string for the param value
@@ -4840,7 +4844,7 @@
       // then mapping to key=value, then flattening and joining using "&"
       var queryString = queryParams
         .map(function (paramDetails) {
-          var param = paramDetails.param, squash = paramDetails.squash, encoded = paramDetails.encoded, isDefaultValue = paramDetails.isDefaultValue
+          var param = paramDetails.param; var squash = paramDetails.squash; var encoded = paramDetails.encoded; var isDefaultValue = paramDetails.isDefaultValue
           if (encoded == null || (isDefaultValue && squash !== false)) { return }
           if (!isArray(encoded)) { encoded = [encoded] }
           if (encoded.length === 0) { return }
@@ -5392,7 +5396,7 @@
       }
       // Return the ViewConfig's context's depth in the context tree.
       function viewConfigDepth (config) {
-        var context = config.viewDecl.$context, count = 0
+        var context = config.viewDecl.$context; var count = 0
         while (++count && context.parent) { context = context.parent }
         return count
       }
@@ -6223,7 +6227,7 @@
          */
     UrlService.prototype.sync = function (evt) {
       if (evt && evt.defaultPrevented) { return }
-      var _a = this.router, urlService = _a.urlService, stateService = _a.stateService
+      var _a = this.router; var urlService = _a.urlService; var stateService = _a.stateService
       var url = { path: urlService.path(), search: urlService.search(), hash: urlService.hash() }
       var best = this.match(url)
       var applyResult = pattern([
@@ -7061,7 +7065,7 @@
       var Phase = exports.TransitionHookPhase
       var TH = TransitionHook
       var paths = this._criteriaPaths
-      var NORMAL_SORT = false, REVERSE_SORT = true
+      var NORMAL_SORT = false; var REVERSE_SORT = true
       var SYNCHRONOUS = true
       this._defineEvent('onCreate', Phase.CREATE, 0, paths.to, NORMAL_SORT, TH.LOG_REJECTED_RESULT, TH.THROW_ERROR, SYNCHRONOUS)
       this._defineEvent('onBefore', Phase.BEFORE, 0, paths.to)
@@ -7075,7 +7079,7 @@
     }
     /** @hidden */
     TransitionService.prototype._defineCorePaths = function () {
-      var STATE = exports.TransitionHookScope.STATE, TRANSITION = exports.TransitionHookScope.TRANSITION
+      var STATE = exports.TransitionHookScope.STATE; var TRANSITION = exports.TransitionHookScope.TRANSITION
       this._definePathType('to', TRANSITION)
       this._definePathType('from', TRANSITION)
       this._definePathType('exiting', STATE)
@@ -7593,7 +7597,7 @@
         if (!glob.matches(this.$current.name)) { return false }
         stateOrName = this.$current.name
       }
-      var state = this.router.stateRegistry.matcher.find(stateOrName, options.relative), include = this.$current.includes
+      var state = this.router.stateRegistry.matcher.find(stateOrName, options.relative); var include = this.$current.includes
       if (!isDefined(state)) { return undefined }
       if (!isDefined(include[state.name])) { return false }
       if (!params) { return true }
@@ -7845,7 +7849,7 @@
 
   /** @internalapi @module vanilla */ /** */
   var keyValsToObjectR = function (accum, _a) {
-    var key = _a[0], val$$1 = _a[1]
+    var key = _a[0]; var val$$1 = _a[1]
     if (!accum.hasOwnProperty(key)) {
       accum[key] = val$$1
     } else if (isArray(accum[key])) {
@@ -7864,8 +7868,8 @@
   }
   function parseUrl$1 (url) {
     var orEmptyString = function (x) { return x || '' }
-    var _a = splitHash(url).map(orEmptyString), beforehash = _a[0], hash = _a[1]
-    var _b = splitQuery(beforehash).map(orEmptyString), path = _b[0], search = _b[1]
+    var _a = splitHash(url).map(orEmptyString); var beforehash = _a[0]; var hash = _a[1]
+    var _b = splitQuery(beforehash).map(orEmptyString); var path = _b[0]; var search = _b[1]
     return { path: path, search: search, hash: hash, url: url }
   }
   var buildUrl = function (loc) {
@@ -8037,7 +8041,7 @@
       return stripLastPathElement(this._config.baseHref())
     }
     PushStateLocationService.prototype._get = function () {
-      var _a = this._location, pathname = _a.pathname, hash = _a.hash, search = _a.search
+      var _a = this._location; var pathname = _a.pathname; var hash = _a.hash; var search = _a.search
       search = splitQuery(search)[1] // strip ? if found
       hash = splitHash(hash)[1] // strip # if found
       var basePrefix = this._getBasePrefix()
@@ -8347,7 +8351,7 @@
   function ng1ViewsBuilder (state) {
     // Do not process root state
     if (!state.parent) { return {} }
-    var tplKeys = ['templateProvider', 'templateUrl', 'template', 'notify', 'async'], ctrlKeys = ['controller', 'controllerProvider', 'controllerAs', 'resolveAs'], compKeys = ['component', 'bindings', 'componentProvider'], nonCompKeys = tplKeys.concat(ctrlKeys), allViewKeys = compKeys.concat(nonCompKeys)
+    var tplKeys = ['templateProvider', 'templateUrl', 'template', 'notify', 'async']; var ctrlKeys = ['controller', 'controllerProvider', 'controllerAs', 'resolveAs']; var compKeys = ['component', 'bindings', 'componentProvider']; var nonCompKeys = tplKeys.concat(ctrlKeys); var allViewKeys = compKeys.concat(nonCompKeys)
     // Do not allow a state to have both state-level props and also a `views: {}` property.
     // A state without a `views: {}` property can declare properties for the `$default` view as properties of the state.
     // However, the `$default` approach should not be mixed with a separate `views: ` block.
@@ -8357,7 +8361,7 @@
                 "Move the following properties into a view (in the 'views' object): " +
                 (' ' + allViewKeys.filter(function (key) { return isDefined(state[key]) }).join(', ')))
     }
-    var views = {}, viewsObject = state.views || { $default: pick(state, allViewKeys) }
+    var views = {}; var viewsObject = state.views || { $default: pick(state, allViewKeys) }
     forEach(viewsObject, function (config, name) {
       // Account for views: { "": { template... } }
       name = name || '$default'
@@ -8566,7 +8570,7 @@
         return /^(x|data)-/.exec(kebobed) ? 'x-' + kebobed : kebobed
       }
       var attributeTpl = function (input) {
-        var name = input.name, type = input.type
+        var name = input.name; var type = input.type
         var attrName = kebob(name)
         // If the ui-view has an attribute which matches a binding on the routed component
         // then pass that attribute through to the routed component template.
@@ -9263,7 +9267,7 @@
   /** @hidden */
   function clickHook (el, $state, $timeout, type, getDef) {
     return function (e) {
-      var button = e.which || e.button, target = getDef()
+      var button = e.which || e.button; var target = getDef()
       if (!(button > 1 || e.ctrlKey || e.metaKey || e.shiftKey || el.attr('target'))) {
         // HACK: This is to allow ng-clicks to be processed before the transition is initiated:
         var transition_1 = $timeout(function () {
@@ -9833,8 +9837,8 @@
     .directive('uiSrefActiveEq', uiSrefActiveDirective)
     .directive('uiState', uiStateDirective)
 
-    /** @publicapi @module ng1 */ /** */
-    /**
+  /** @publicapi @module ng1 */ /** */
+  /**
      * `isState` Filter: truthy if the current state is the parameter
      *
      * Translates to [[StateService.is]] `$state.is("stateName")`.
@@ -9875,8 +9879,8 @@
     .filter('isState', $IsStateFilter)
     .filter('includedByState', $IncludedByStateFilter)
 
-    /** @publicapi @module directives */ /** */
-    /**
+  /** @publicapi @module directives */ /** */
+  /**
      * `ui-view`: A viewport directive which is filled in by a view from the active state.
      *
      * ### Attributes
@@ -10042,7 +10046,7 @@
         transclude: 'element',
         compile: function (tElement, tAttrs, $transclude) {
           return function (scope, $element, attrs) {
-            var onloadExp = attrs['onload'] || '', autoScrollExp = attrs['autoscroll'], renderer = getRenderer(attrs, scope), inherited = $element.inheritedData('$uiView') || rootData, name = $interpolate(attrs['uiView'] || attrs['name'] || '')(scope) || '$default'
+            var onloadExp = attrs['onload'] || ''; var autoScrollExp = attrs['autoscroll']; var renderer = getRenderer(attrs, scope); var inherited = $element.inheritedData('$uiView') || rootData; var name = $interpolate(attrs['uiView'] || attrs['name'] || '')(scope) || '$default'
             var previousEl, currentEl, currentScope, viewConfig, unregister
             var activeUIView = {
               $type: 'ng1',
@@ -10099,7 +10103,7 @@
             }
             function updateView (config) {
               var newScope = scope.$new()
-              var animEnter = $q$$1.defer(), animLeave = $q$$1.defer()
+              var animEnter = $q$$1.defer(); var animLeave = $q$$1.defer()
               var $uiViewData = {
                 $cfg: config,
                 $uiView: activeUIView

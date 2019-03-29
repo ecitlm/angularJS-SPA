@@ -2,7 +2,6 @@
 //   var app = angular.module('app', ['ui.router'])
 //   return app
 // })
-
 define(['angular', 'uiRoute'], function (angular) {
   var app = angular.module('app', ['ui.router'])
   app.config(function ($controllerProvider, $compileProvider, $filterProvider, $provide) {

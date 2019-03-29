@@ -3,6 +3,6 @@ define(['app', 'filters'], function (app, $filters) {
     var vm = $scope.vm = {}
     vm.title = 'this is the news page'
     common.getName('hello world this is the news page')
-    $scope.$parent.list.page = 'news.html'
+    $scope.$parent.list.active = '2'
   })
 })
