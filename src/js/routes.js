@@ -15,33 +15,37 @@ define(['app'], function (app) {
       }
     }
     $urlRouterProvider.otherwise('/index')
-    $stateProvider.state('index', {
-      url: '/index',
-      templateUrl: '../../views/tpls/index.html',
-      controller: 'ctrl.index',
-      resolve: {
-        deps: app.loadJs('../../views/tpls/index'),
-        params: function () {
-          return {
-            name: 'ecitlm',
-            job: 'web developer'
+    $stateProvider
+      .state('index', {
+        url: '/index',
+        templateUrl: '../../views/tpls/index.html',
+        controller: 'ctrl.index',
+        title: 'test',
+        resolve: {
+          deps: app.loadJs('../../views/tpls/index'),
+          params: function () {
+            return {
+              name: 'ecitlm',
+              job: 'web developer'
+            }
           }
         }
-      }
-    }).state('mine', {
-      url: '/mine',
-      templateUrl: '../../views/tpls/mine.html',
-      controller: 'ctrl.mine',
-      resolve: {
-        deps: app.loadJs('../../views/tpls/mine')
-      }
-    }).state('page', {
-      url: '/page',
-      templateUrl: '../../views/tpls/news.html',
-      controller: 'ctrl.page',
-      resolve: {
-        deps: app.loadJs('../../views/tpls/news')
-      }
-    })
+      })
+      .state('mine', {
+        url: '/mine',
+        templateUrl: '../../views/tpls/mine.html',
+        controller: 'ctrl.mine',
+        resolve: {
+          deps: app.loadJs('../../views/tpls/mine')
+        }
+      })
+      .state('news', {
+        url: '/news',
+        templateUrl: '../../views/tpls/news.html',
+        controller: 'ctrl.page',
+        resolve: {
+          deps: app.loadJs('../../views/tpls/news')
+        }
+      })
   })
 })
