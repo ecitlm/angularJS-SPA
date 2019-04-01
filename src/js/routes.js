@@ -17,7 +17,7 @@ define(['app'], function (app) {
     $urlRouterProvider.otherwise('/index')
     $stateProvider
       .state('index', {
-        url: '/index',
+        url: '/index?name&id',
         templateUrl: '../../views/tpls/index.html',
         controller: 'ctrl.index',
         title: 'test',

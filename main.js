@@ -27,7 +27,7 @@ require.config({
   priority: [
     'angular'
   ],
-  urlArgs: 'version=219039'
+  urlArgs: 'version=20190401'
 })
 
 require(['angular',
