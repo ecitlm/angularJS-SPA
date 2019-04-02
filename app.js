@@ -1,6 +1,5 @@
 define(['angular', 'uiRoute'], function (angular) {
   var app = angular.module('app', ['ui.router'])
-
   // 配置全局的路由监听
   app.run(function ($rootScope, $transitions, $state) {
     $transitions.onStart({}, function (transition) {
@@ -17,13 +16,13 @@ define(['angular', 'uiRoute'], function (angular) {
   })
 
   app.config(function ($controllerProvider, $compileProvider, $filterProvider, $provide) {
-      // app.register = {
-      //   // 得到$controllerProvider的引用
-      //   controller: $controllerProvider.register,
-      //   directive: $compileProvider.directive,
-      //   filter: $filterProvider.register,
-      //   service: $provide.service
-      // }
+      app.register = {
+        // 得到$controllerProvider的引用
+        controller: $controllerProvider.register,
+        directive: $compileProvider.directive,
+        filter: $filterProvider.register,
+        service: $provide.service
+      }
     })
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
       // 去除url的 !

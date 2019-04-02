@@ -7,7 +7,8 @@ require.config({
     'filters': './src/js/filters',
     'app': './app',
     'axios': './src/js/lib/axios.min',
-    '$api': './src/js/http'
+    '$api': './src/js/http',
+    'routeConfig': './src/js/routes.config'
   },
   waitSeconds: 0,
   shim: {
@@ -18,7 +19,7 @@ require.config({
       deps: ['angular']
     },
     'routes': {
-      deps: ['uiRoute']
+      deps: ['uiRoute', 'routeConfig']
     },
     'common': {
       'exports': 'common'

@@ -1,4 +1,5 @@
-define(['app'], function (app) {
+define(['app', 'routeConfig'], function (app, routeConfig) {
+  console.log(routeConfig)
   app.config(function ($stateProvider, $urlRouterProvider, $controllerProvider) {
     app.registerController = $controllerProvider.register
     app.loadJs = function (js) {
@@ -15,39 +16,19 @@ define(['app'], function (app) {
       }
     }
     $urlRouterProvider.otherwise('/index')
-    $stateProvider
-      .state('index', {
-        url: '/index?name&id',
-        templateUrl: '../../views/tpls/index.html',
-        controller: 'ctrl.index',
-        title: '首页',
+    angular.forEach(routeConfig.routes, function (route, path) {
+      $stateProvider.state(path, {
+        url: route.url,
+        templateUrl: route.templateUrl,
+        controller: route.controller,
+        title: route.title,
         resolve: {
-          deps: app.loadJs('../../views/tpls/index'),
+          deps: app.loadJs(route.dependencies[0]),
           params: function () {
-            return {
-              name: 'ecitlm',
-              job: 'web developer'
-            }
+            return route.params || {}
           }
         }
       })
-      .state('mine', {
-        url: '/mine',
-        templateUrl: '../../views/tpls/mine.html',
-        controller: 'ctrl.mine',
-        title: '我的页面',
-        resolve: {
-          deps: app.loadJs('../../views/tpls/mine')
-        }
-      })
-      .state('news', {
-        url: '/news',
-        templateUrl: '../../views/tpls/news.html',
-        controller: 'ctrl.page',
-        title: 'news页面',
-        resolve: {
-          deps: app.loadJs('../../views/tpls/news')
-        }
-      })
+    })
   })
 })
