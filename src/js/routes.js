@@ -20,7 +20,7 @@ define(['app'], function (app) {
         url: '/index?name&id',
         templateUrl: '../../views/tpls/index.html',
         controller: 'ctrl.index',
-        title: 'test',
+        title: '首页',
         resolve: {
           deps: app.loadJs('../../views/tpls/index'),
           params: function () {
@@ -35,6 +35,7 @@ define(['app'], function (app) {
         url: '/mine',
         templateUrl: '../../views/tpls/mine.html',
         controller: 'ctrl.mine',
+        title: '我的页面',
         resolve: {
           deps: app.loadJs('../../views/tpls/mine')
         }
@@ -43,6 +44,7 @@ define(['app'], function (app) {
         url: '/news',
         templateUrl: '../../views/tpls/news.html',
         controller: 'ctrl.page',
+        title: 'news页面',
         resolve: {
           deps: app.loadJs('../../views/tpls/news')
         }
