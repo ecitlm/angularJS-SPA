@@ -1,3 +1,4 @@
+/* global  define */
 define(['angular', 'uiRoute'], function (angular) {
   var app = angular.module('app', ['ui.router'])
   // 配置全局的路由监听

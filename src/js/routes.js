@@ -1,5 +1,5 @@
+/* global angular, define */
 define(['app', 'routeConfig'], function (app, routeConfig) {
-  console.log(routeConfig)
   app.config(function ($stateProvider, $urlRouterProvider, $controllerProvider) {
     app.registerController = $controllerProvider.register
     app.loadJs = function (js) {

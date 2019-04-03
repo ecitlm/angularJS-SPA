@@ -1,3 +1,4 @@
+/* global define */
 define(['app', 'axios'], function (app, axios) {
   app.service('$api', function () {
     var instance = axios.create({
@@ -21,7 +22,7 @@ define(['app', 'axios'], function (app, axios) {
         return response.data
       } else {
         var err = new Error()
-        err.response = response;
+        err.response = response
         return Promise.reject(err)
       }
     }, function (error) {
