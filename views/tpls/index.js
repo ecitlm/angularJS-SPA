@@ -1,3 +1,4 @@
+/* global define */
 define(['app', 'filters'], function (app, filters) {
   app.registerController('ctrl.index', function ($scope, $rootScope, params, $stateParams, $state) {
     var vm = $scope.vm = {}

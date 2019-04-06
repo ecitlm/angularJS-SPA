@@ -1,3 +1,4 @@
+/* global define */
 define(['app'], function (app) {
   app.registerController('ctrl.news', function ($scope, $api) {
     var vm = $scope.vm = {}
