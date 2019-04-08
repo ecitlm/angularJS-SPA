@@ -5,7 +5,7 @@ define([], function () {
       'index': {
         url: '/index',
         templateUrl: '../../views/tpls/index.html',
-        controller: 'ctrl.index',
+        controller: 'indexController',
         title: '首页',
         auth: false,
         dependencies: ['../../views/tpls/index']
@@ -13,7 +13,7 @@ define([], function () {
       'news': {
         url: '/news',
         templateUrl: '../../views/tpls/news.html',
-        controller: 'ctrl.news',
+        controller: 'newsController',
         title: 'news页面',
         auth: false,
         dependencies: ['../../views/tpls/news']
@@ -21,7 +21,7 @@ define([], function () {
       'mine': {
         url: '/mine',
         templateUrl: '../../views/tpls/mine.html',
-        controller: 'ctrl.mine',
+        controller: 'mineController',
         title: 'mine页面',
         auth: false,
         dependencies: ['../../views/tpls/mine']

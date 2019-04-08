@@ -1,6 +1,6 @@
 /* global define */
 define(['app'], function (app) {
-  app.registerController('ctrl.news', function ($scope, $api) {
+  app.registerController('newsController', function ($scope, $api) {
     var vm = $scope.vm = {}
     vm.title = 'this is the news page'
     $scope.$parent.list.active = '2'
