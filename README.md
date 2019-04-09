@@ -1,4 +1,4 @@
-### requirejs-in-angular
+### angularJS-SPA
 
 > 这是一个无任何脚手架、脱离`node.js`前端工作流的 AngularJS 单页应用项目示例，基于`requirejs`模块化开发
 > `requirejs+angularjs+ui-router` 实现模块懒加载（`controller` 按需加载），路由配置路由拦截、`filter` 配置,`axios` 网络请求管理封装。
