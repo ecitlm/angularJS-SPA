@@ -1,6 +1,6 @@
 /* global define */
 define(['app', 'filters'], function (app, filters) {
-  app.registerController('mineController', function ($scope, $rootScope) {
+  app.registerController('MineController', function ($scope, $rootScope) {
     var vm = $scope.vm = {}
     vm.title = 'this is this first mine page'
     // console.log($scope, $scope.$parent.list)

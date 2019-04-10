@@ -5,7 +5,7 @@ require.config({
     'routes': './src/js/routes',
     'common': './src/js/common',
     'filters': './src/js/filters',
-    'app': './app',
+    'app': './src/js/app',
     'axios': './src/js/lib/axios.min',
     '$api': './src/js/http',
     'routeConfig': './src/js/routes.config'

@@ -1,6 +1,6 @@
 /* global define */
 define(['app', 'filters'], function (app, filters) {
-  app.registerController('indexController', function ($scope, $rootScope, params, $stateParams, $state) {
+  app.registerController('IndexController', function ($scope, $rootScope, params, $stateParams, $state) {
     var vm = $scope.vm = {}
     vm.title = 'this is this first home page'
     console.log($stateParams, $state)
