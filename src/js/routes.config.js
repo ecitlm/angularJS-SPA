@@ -4,27 +4,27 @@ define([], function () {
     routes: {
       'index': {
         url: '/index',
-        templateUrl: '../../views/tpls/index.html',
+        templateUrl: '../../views/index/index.html',
         controller: 'IndexController',
         title: '首页',
         auth: false,
-        dependencies: ['../../views/tpls/index']
+        dependencies: ['../../views/index/index']
       },
       'news': {
         url: '/news',
-        templateUrl: '../../views/tpls/news.html',
+        templateUrl: '../../views/news/news.html',
         controller: 'NewsController',
         title: 'news页面',
         auth: false,
-        dependencies: ['../../views/tpls/news']
+        dependencies: ['../../views/news/news']
       },
       'mine': {
         url: '/mine',
-        templateUrl: '../../views/tpls/mine.html',
+        templateUrl: '../../views/mine/mine.html',
         controller: 'MineController',
         title: 'mine页面',
         auth: false,
-        dependencies: ['../../views/tpls/mine']
+        dependencies: ['../../views/mine/mine']
       }
     }
   }
