@@ -5,9 +5,10 @@ define(['angular', 'uiRoute'], function (angular) {
   app.run(function ($rootScope, $transitions, $state) {
     $transitions.onStart({}, function (transition) {
       document.title = transition.to().title
-      console.log()
+      console.log(transition.to().auth)
       console.log(transition.to().title)
       console.log(transition.from())
+      console.log(transition.to())
       console.log(transition.params())
       console.log(
         'Successful Transition from ' + transition.from().name +
