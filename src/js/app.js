@@ -19,7 +19,6 @@ define(['angular', 'uiRoute'], function (angular) {
 
   app.config(function ($controllerProvider, $compileProvider, $filterProvider, $provide) {
       app.register = {
-        // 得到$controllerProvider的引用
         controller: $controllerProvider.register,
         directive: $compileProvider.directive,
         filter: $filterProvider.register,

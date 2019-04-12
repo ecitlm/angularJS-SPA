@@ -1,9 +1,8 @@
 /* global define */
 define(['app', 'filters'], function (app, filters) {
   app.registerController('MineController', function ($scope, $rootScope) {
-    var vm = $scope.vm = {}
-    vm.title = 'this is this first mine page'
-    // console.log($scope, $scope.$parent.list)
+    $scope.title = 'this is the first mine page'
+    console.log('parent', $scope.$parent.list)
     $scope.$parent.list.active = '3'
     $scope.test = function () {
       console.log('ng init')
