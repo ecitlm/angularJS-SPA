@@ -18,13 +18,13 @@ define(['angular', 'uiRoute'], function (angular) {
   })
 
   app.config(function ($controllerProvider, $compileProvider, $filterProvider, $provide) {
-      app.register = {
-        controller: $controllerProvider.register,
-        directive: $compileProvider.directive,
-        filter: $filterProvider.register,
-        service: $provide.service
-      }
-    })
+    app.register = {
+      controller: $controllerProvider.register,
+      directive: $compileProvider.directive,
+      filter: $filterProvider.register,
+      service: $provide.service
+    }
+  })
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
       // 去除url的 !
       $locationProvider.hashPrefix('')

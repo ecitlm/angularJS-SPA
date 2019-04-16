@@ -4,9 +4,8 @@ var dest = './dist/src'
 
 module.exports = {
   css: {
-    all: src + '/css/**/*.css', // 所有scss
-    src: src + '/css/*.css', // 需要编译的scss
-    dest: dest + '/css' // 输出目录
+    src: src + '/css/*.css',
+    dest: dest + '/css'
   },
   images: {
     src: src + '/images/**/*.{png,jpg,gif,ico}',
@@ -14,23 +13,26 @@ module.exports = {
   },
   js: {
     src: src + '/js/**/*',
-    dest: dest + '/js',
-    rev: dest + '/rev/js'
+    dest: dest + '/js'
   },
   html: {
-    src: './**/**/*.html',
-    dest: './dist'
+    src: './views/**/*.html',
+    dest: './dist/views'
   },
   controllerJs: {
     src: './views/**/*.js',
     dest: './dist/views'
   },
+  entryHtml: {
+    src: './*.html',
+    dest: './dist'
+  },
+  entryJs: {
+    src: './main.js',
+    dest: './dist'
+  },
+
   clean: {
     src: dest
-  },
-  rev: {
-    revJson: dest + '/rev/**/*.json',
-    src: '*.html', // root index.html
-    dest: ''
   }
 }

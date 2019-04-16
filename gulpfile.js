@@ -11,7 +11,7 @@ const clean = require('gulp-clean')
 const imagemin = require('gulp-imagemin')
 const base64 = require('gulp-base64')
 const gulpSync = require('gulp-sync')(gulp)
-const config = require('./config/config')
+const config = require('./build/config')
 // var concat = require('gulp-concat') // 合并文件 --合并只是放一起--压缩才会真正合并相同样式
 const connect = require('gulp-connect')
 const proxy = require('http-proxy-middleware')
@@ -31,26 +31,48 @@ const handleError = function (err) {
 gulp.task('script', function () {
   let combined = combiner.obj([
     gulp.src(config.js.src)
-    .pipe(babel({
-      presets: ['es2015']
-    }))
-    //.pipe(uglify())
-    .pipe(gulp.dest(config.js.dest))
-    .pipe(connect.reload())
+      .pipe(babel({
+        presets: ['es2015']
+      }))
+      .pipe(uglify({
+        mangle: false,
+        compress: true
+      }))
+      .pipe(gulp.dest(config.js.dest))
+      .pipe(connect.reload())
   ])
   combined.on('error', handleError) // 打印错误日志
 })
 
-// 打包views文件中的 JS
+// 打包views文件中的 JS controller
 gulp.task('controllerJs', function () {
   let combined = combiner.obj([
     gulp.src(config.controllerJs.src)
-    .pipe(babel({
-      presets: ['es2015']
-    }))
-    .pipe(uglify())
-    .pipe(gulp.dest(config.controllerJs.dest))
-    .pipe(connect.reload())
+      .pipe(babel({
+        presets: ['es2015']
+      }))
+      .pipe(uglify({
+        mangle: true,
+        compress: true
+      }))
+      .pipe(gulp.dest(config.controllerJs.dest))
+      .pipe(connect.reload())
+  ])
+  combined.on('error', handleError) // 打印错误日志
+})
+
+gulp.task('entryJs', function () {
+  let combined = combiner.obj([
+    gulp.src(config.entryJs.src)
+      .pipe(babel({
+        presets: ['es2015']
+      }))
+      .pipe(uglify({
+        mangle: true,
+        compress: true
+      }))
+      .pipe(gulp.dest(config.entryJs.dest))
+      .pipe(connect.reload())
   ])
   combined.on('error', handleError) // 打印错误日志
 })
@@ -59,17 +81,17 @@ gulp.task('controllerJs', function () {
 gulp.task('css', function () {
   let combined = combiner.obj([
     gulp.src(config.css.src)
-    .pipe(sass())
-    .pipe(base64({
-      maxImageSize: 4 * 1024 // bytes
-    }))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions', 'Android >= 4.0'],
-      cascade: false
-    }))
-    .pipe(minifyCss()) // 执行压缩
-    .pipe(gulp.dest(config.css.dest)) // 将压缩的文件发布到新路
-    .pipe(connect.reload())
+      .pipe(sass())
+      .pipe(base64({
+        maxImageSize: 4 * 1024 // bytes
+      }))
+      .pipe(autoprefixer({
+        browsers: ['last 2 versions', 'Android >= 4.0'],
+        cascade: false
+      }))
+      .pipe(minifyCss()) // 执行压缩
+      .pipe(gulp.dest(config.css.dest)) // 将压缩的文件发布到新路
+      .pipe(connect.reload())
   ])
   combined.on('error', handleError) // 打印错误日志
 })
@@ -94,8 +116,14 @@ gulp.task('html', function () {
     .pipe(connect.reload())
 })
 
+gulp.task('entryHtml', function () {
+  gulp.src(config.entryHtml.src)
+    .pipe(gulp.dest(config.entryHtml.dest))
+    .pipe(connect.reload())
+})
+
 gulp.task('clean', function (cb) {
-  return gulp.src(['dist', 'rev'])
+  return gulp.src(['dist'])
     .pipe(clean())
 })
 
@@ -119,6 +147,9 @@ gulp.task('run', function () {
   gulp.watch(config.js.src, ['script'])
   gulp.watch(config.images.src, ['images'])
   gulp.watch(config.html.src, ['html'])
+  gulp.watch(config.entryHtml.src, ['entryHtml'])
+  gulp.watch(config.entryJs.src, ['entryJs'])
+  gulp.watch(config.controllerJs.src, ['controllerJs'])
 })
 
-gulp.task('default', gulpSync.async(['script', 'controllerJs', 'css', 'images', 'html']))
+gulp.task('default', gulpSync.async(['script', 'controllerJs', 'css', 'images', 'html', 'entryHtml', 'entryJs']))

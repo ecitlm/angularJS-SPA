@@ -1,6 +1,6 @@
 /* global define */
 define(['app', 'filters'], function (app, filters) {
-  app.registerController('MineController', function ($scope, $rootScope) {
+  app.registerController('MineController', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.title = 'this is the first mine page'
     console.log('parent', $scope.$parent.list)
     $scope.$parent.list.active = '3'
@@ -12,5 +12,5 @@ define(['app', 'filters'], function (app, filters) {
     $scope.btnEvent = function ($event) {
       console.log($event.target)
     }
-  })
+  }])
 })
