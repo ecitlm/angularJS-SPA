@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
-  font-size: 16px;
   list-style: none
 }
 
@@ -34,3 +33,18 @@
   min-height: 90vh;
   background: #fefefe;
 }
+
+#index {
+  padding: 0 50px
+}
+
+#index h1 {
+  text-align: center;
+  padding: 0 20px;
+}
+
+#index h2 {
+  padding: 20px 0;
+}
+
+#index p {}
