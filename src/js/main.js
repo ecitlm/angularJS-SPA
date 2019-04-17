@@ -1,14 +1,14 @@
 require.config({
   paths: {
-    'angular': './src/js/lib/angular',
-    'uiRoute': './src/js/lib/angular-ui-router',
-    'routes': './src/js/routes',
-    'common': './src/js/common',
-    'filters': './src/js/filters',
-    'app': './src/js/app',
-    'axios': './src/js/lib/axios.min',
-    '$api': './src/js/http',
-    'routeConfig': './src/js/routes.config'
+    'angular': './lib/angular',
+    'uiRoute': './lib/angular-ui-router',
+    'routes': './routes',
+    'common': './common',
+    'filters': './filters',
+    'app': './app',
+    'axios': './lib/axios.min',
+    '$api': './http',
+    'routeConfig': './routes.config'
   },
   waitSeconds: 0,
   shim: {

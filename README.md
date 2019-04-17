@@ -1,6 +1,6 @@
 ### angularJS-SPA
 
-> 这是一个无任何脚手架、脱离`node.js`前端工作流的 AngularJS 单页应用项目示例，基于`requirejs`模块化开发
+> 这个 版本基于gulp-cli 对项目文件进行打包压缩（文件压缩，JS语法转码 ）
 > `requirejs+angularjs+ui-router` 实现模块懒加载（`controller` 按需加载），路由配置路由拦截、`filter` 配置,`axios` 网络请求管理封装。
 > 可以基于本示例直接进入项目开发。
 
