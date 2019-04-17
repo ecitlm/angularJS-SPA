@@ -15,7 +15,10 @@ const config = require('./build/config')
 // var concat = require('gulp-concat') // 合并文件 --合并只是放一起--压缩才会真正合并相同样式
 const connect = require('gulp-connect')
 const proxy = require('http-proxy-middleware')
-
+const filter = require('gulp-filter')
+const f = filter(['src/js/lib/'], {
+  restore: true
+})
 /* 定义错误打印的方法 */
 const handleError = function (err) {
   let colors = gutil.colors
@@ -30,7 +33,8 @@ const handleError = function (err) {
 //  打包src中 的JS
 gulp.task('script', function () {
   let combined = combiner.obj([
-    gulp.src(config.js.src)
+    gulp.src([config.js.src])
+      .pipe(f)
       .pipe(babel({
         presets: ['es2015']
       }))
@@ -38,6 +42,7 @@ gulp.task('script', function () {
         mangle: false,
         compress: true
       }))
+      .pipe(f.restore)
       .pipe(gulp.dest(config.js.dest))
       .pipe(connect.reload())
   ])
