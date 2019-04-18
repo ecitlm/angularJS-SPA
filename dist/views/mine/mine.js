@@ -1,0 +1,1 @@
+"use strict";define(["app","filters"],function(t,e){t.registerController("MineController",["$scope","$rootScope",function(t,e){t.title="this is the first mine page",console.log("parent",t.$parent.list),t.$parent.list.active="3",t.test=function(){console.log("ng init")},t.btnEvent=function(t){console.log(t.target)}}])});

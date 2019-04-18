@@ -1,4 +1,5 @@
 require.config({
+  baseUrl: '',
   paths: {
     'angular': './src/js/lib/angular',
     'uiRoute': './src/js/lib/angular-ui-router',
