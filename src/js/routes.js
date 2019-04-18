@@ -16,7 +16,7 @@ define(['app', 'routeConfig'], function (app, routeConfig) {
       }
     }
     $urlRouterProvider.otherwise('/index')
-    var dir = '../../'
+    var dir = './'
     angular.forEach(routeConfig.routes, function (route, path) {
       $stateProvider.state(path, {
         url: route.url,

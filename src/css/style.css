@@ -9,23 +9,20 @@
 .nav {
   display: flex;
   flex: 1;
-  border-bottom: 1px solid #e3e3e3
-}
-
-.nav li {
-  flex: 1;
-  text-align: center;
-}
-
-.nav li a {
-  display: block;
-  padding: 10px 0;
-  font-size: 18px;
-  color: #333333
-}
-
-.nav li a.active {
-  color: blue
+  border-bottom: 1px solid #e3e3e3;
+  li {
+    flex: 1;
+    text-align: center;
+    a{
+      display: block;
+      padding: 10px 0;
+      font-size: 18px;
+      color: #666;
+    }
+    a.active {
+      color: blue
+    }
+  }
 }
 
 .conatiner {
