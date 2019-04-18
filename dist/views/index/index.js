@@ -1,1 +1,0 @@
-"use strict";define(["app","filters"],function(t,e){t.registerController("IndexController",["$scope","$rootScope","params","$stateParams","$state",function(t,e,o,s,l){t.title="this is the first home page",console.log(s,l),console.log(l),console.log(s,t,t.$parent.list,o),t.$parent.list.active="1",t.test=function(t){console.log(t)}}])});

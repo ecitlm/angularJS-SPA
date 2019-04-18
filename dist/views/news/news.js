@@ -1,1 +1,0 @@
-"use strict";define(["app"],function(e){e.registerController("NewsController",["$scope","$api",function(e,t){e.title="this is the news page",e.$parent.list.active="2",t.getNews().then(function(e){console.log(e)}).catch(function(e){console.log(e)})}])});
