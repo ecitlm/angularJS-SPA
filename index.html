@@ -8,19 +8,16 @@
     content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="./src/css/style.css">
   <script src="https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js"></script>
-
   <script src="./src/js/lib/require.js" data-main="./main"></script>
-
   <script>
-    //var vConsole = new VConsole();
+    var vConsole = new VConsole()
+    console.log(vConsole)
   </script>
 </head>
 
 <body ng-controller="appController">
-  <div ng-include="'/views/common/nav.html'"></div>
+  <div ng-include="'./views/common/nav.html'"></div>
   <div ui-view class="conatiner">loading</div>
-
-
 </body>
 
 </html>

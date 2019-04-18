@@ -15,7 +15,7 @@ const config = require('./build/config')
 // var concat = require('gulp-concat') // 合并文件 --合并只是放一起--压缩才会真正合并相同样式
 const connect = require('gulp-connect')
 const proxy = require('http-proxy-middleware')
-const htmlmin = require('gulp-htmlmin');
+const htmlmin = require('gulp-htmlmin')
 const filter = require('gulp-filter')
 const f = filter(['src/js/lib/'], {
   restore: true
@@ -117,12 +117,12 @@ gulp.task('images', function () {
 
 // html
 gulp.task('html', function () {
-    let options = {
-      removeComments: true,//清除HTML注释
-      collapseWhitespace: true,//压缩HTML
-      minifyJS: true,//压缩页面JS
-      minifyCSS: true//压缩页面CSS
-    };
+  let options = {
+    removeComments: true, // 清除HTML注释
+    collapseWhitespace: true, // 压缩HTML
+    minifyJS: true, // 压缩页面JS
+    minifyCSS: true// 压缩页面CSS
+  }
   gulp.src(config.html.src)
     .pipe(htmlmin(options))
     .pipe(gulp.dest(config.html.dest))

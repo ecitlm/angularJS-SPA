@@ -1,5 +1,5 @@
 require.config({
-  baseUrl:'',
+  baseUrl: '',
   paths: {
     'angular': './src/js/lib/angular.min',
     'uiRoute': './src/js/lib/angular-ui-router',
@@ -29,7 +29,7 @@ require.config({
   priority: [
     'angular'
   ],
-  urlArgs: 'version='+new Date().getTime()
+  urlArgs: 'version=20190418'
 })
 
 require(['angular',
