@@ -8,7 +8,7 @@ define([], function () {
         controller: 'IndexController',
         title: '首页',
         auth: false,
-        dependencies: ['views/index/index']
+        dependencies: 'views/index/index'
       },
       'news': {
         url: '/news',
@@ -16,7 +16,7 @@ define([], function () {
         controller: 'NewsController',
         title: 'news页面',
         auth: false,
-        dependencies: ['views/news/news']
+        dependencies: 'views/news/news'
       },
       'mine': {
         url: '/mine',
@@ -24,7 +24,7 @@ define([], function () {
         controller: 'MineController',
         title: 'mine页面',
         auth: true,
-        dependencies: ['views/mine/mine']
+        dependencies: 'views/mine/mine'
       }
     }
   }

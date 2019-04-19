@@ -25,7 +25,7 @@ define(['app', 'routeConfig'], function (app, routeConfig) {
         title: route.title,
         auth: route.auth,
         resolve: {
-          deps: app.loadJs(dir + route.dependencies[0]),
+          deps: app.loadJs(dir + route.dependencies),
           params: function () {
             return route.params || {}
           }
