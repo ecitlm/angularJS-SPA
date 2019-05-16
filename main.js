@@ -1,12 +1,13 @@
 require.config({
   baseUrl: '',
   paths: {
-    'angular': './src/js/lib/angular',
-    'uiRoute': './src/js/lib/angular-ui-router',
+    'angular': './src/js/lib/angular.min',
+    'uiRoute': './src/js/lib/angular-ui-router.min',
     'routes': './src/js/routes',
     'common': './src/js/common',
     'filters': './src/js/filters',
     'app': './src/js/app',
+    'directive': './src/js/directive',
     'axios': './src/js/lib/axios.min',
     '$api': './src/js/http',
     'routeConfig': './src/js/routes.config'
@@ -38,7 +39,8 @@ require(['angular',
   'routes',
   'common',
   'filters',
-  '$api'
-], function (angular, filters, $api) {
+  '$api',
+  'directive'
+], function (angular, filters, $api, directive) {
   angular.bootstrap(document, ['app'])
 })
