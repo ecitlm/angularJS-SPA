@@ -1,6 +1,6 @@
 /* global define */
 define(['app', 'filters'], function (app, filters) {
-  app.registerController('IndexController', function ($scope, $rootScope, params, $stateParams, $state) {
+  app.register.controller('IndexController', function ($scope, $rootScope, params, $stateParams, $state) {
     $scope.title = '欢迎使用angularJs'
     console.log($stateParams, $state)
     console.log($state)
