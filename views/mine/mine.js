@@ -1,6 +1,6 @@
 /* global define */
 define(['app', 'filters'], function (app, filters) {
-  app.registerController('MineController', function ($scope, $rootScope) {
+  app.register.controller('MineController', function ($scope, $rootScope) {
     $scope.title = 'this is the first mine page'
     console.log('parent', $scope.$parent.list)
     $scope.$parent.list.active = '3'

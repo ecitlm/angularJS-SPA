@@ -1,7 +1,6 @@
 /* global angular, define */
 define(['app', 'routeConfig'], function (app, routeConfig) {
   app.config(function ($stateProvider, $urlRouterProvider, $controllerProvider) {
-    app.registerController = $controllerProvider.register
     app.loadJs = function (js) {
       return function ($rootScope, $q) {
         var def = $q.defer()
