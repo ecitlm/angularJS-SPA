@@ -1,7 +1,7 @@
 require.config({
   baseUrl: '',
   paths: {
-    'angular': './src/js/lib/angular.min',
+    'angular': './src/js/lib/angular',
     'uiRoute': './src/js/lib/angular-ui-router.min',
     'routes': './src/js/routes',
     'common': './src/js/common',

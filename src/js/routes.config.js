@@ -25,7 +25,16 @@ define([], function () {
         title: 'mine页面',
         auth: true,
         dependencies: 'views/mine/mine'
+      },
+      'directive': {
+        url: '/directive',
+        templateUrl: 'views/common/directive.html',
+        controller: 'DirectiveController',
+        title: '指令以及组件',
+        auth: true,
+        dependencies: 'views/common/directive.js'
       }
+
     }
   }
 })
