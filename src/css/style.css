@@ -58,8 +58,7 @@
   height: 22px;
   display: inline-block;
   vertical-align: middle;
-  background: url("../images/angular-icheck.png");
-  background-size: cover;
+  background: url("../images/angular-icheck.png") no-repeat;
   background-position: -144px 0px
 }
 
