@@ -3,7 +3,7 @@ define([], function () {
   return {
     routes: {
       'index': {
-        url: '/index',
+        url: '/index?id&name',
         templateUrl: 'views/index/index.html',
         controller: 'IndexController',
         title: '首页',

@@ -32,7 +32,6 @@ define(['app'], function (app) {
       template: '<div class="angular-icheck">\n    <div class="checkbox"></div>\n<div class="label" ng-transclude></div>\n</div>',
       link: function (scope, ele, attrs, ctrl) {
         var box = angular.element(ele[0].querySelector('.checkbox'))
-        console.log(ele)
         ele.bind('click', function () {
           box.toggleClass('checked')
           ctrl.$setViewValue(box.hasClass('checked'))
@@ -72,7 +71,7 @@ define(['app'], function (app) {
       restrict: 'EA',
       replace: false,
       transclude: true,
-      templateUrl: '../../views/components/test.html',
+      templateUrl: './views/components/test.html',
       controller: function ($scope, $element, $attrs) {
         $scope.testBtns = $attrs.testbtn
       },
@@ -87,7 +86,7 @@ define(['app'], function (app) {
     restrict: 'EA',
     transclude: true,
     require: 'ngModel',
-    templateUrl: '../../views/components/com.html',
+    templateUrl: './views/components/com.html',
     controller: function ($scope) {
       this.name = 'ecitlm'
     },
