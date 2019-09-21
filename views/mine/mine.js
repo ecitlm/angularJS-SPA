@@ -1,6 +1,6 @@
 /* global define */
 define(['app', 'filters'], function (app, filters) {
-  app.registerController('MineController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+  app.registerController('MineController', ['$scope', '$rootScope','$state', function ($scope, $rootScope,$state) {
     $scope.title = 'this is the first mine page'
     console.log('parent', $scope.$parent.list)
     $scope.$parent.list.active = '3'
@@ -10,7 +10,8 @@ define(['app', 'filters'], function (app, filters) {
     }
     // 获取ng-click 事件DOM
     $scope.btnEvent = function ($event) {
-      console.log($event.target)
+      console.log($event.target,$state)
+      $state.go('index',{id:9527})
     }
   }])
 })

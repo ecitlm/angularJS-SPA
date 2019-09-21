@@ -4,7 +4,7 @@ var dest = './dist/src'
 
 module.exports = {
   css: {
-    src: src + '/css/*.css',
+    src: src + '/css/*.*',
     dest: dest + '/css'
   },
   images: {
