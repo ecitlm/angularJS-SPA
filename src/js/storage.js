@@ -8,7 +8,6 @@ define([], function () {
       var actCode = window.actCode || 'noActCode'
       var data = {}
       data['key'] = value
-      console.log(window.userOpenId)
       window.sessionStorage.setItem(actCode + key, JSON.stringify(data))
     },
     get: function (key) {

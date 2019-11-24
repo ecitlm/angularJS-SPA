@@ -29,7 +29,7 @@ define(['app'], function (app) {
       transclude: true,
       require: 'ngModel',
       replace: true,
-      template: '<div class="angular-icheck">\n    <div class="checkbox"></div>\n<div class="label" ng-transclude></div>\n</div>',
+      template: '<div class="angular-icheck">\n<div class="checkbox"></div>\n<div class="label" ng-transclude></div>\n</div>',
       link: function (scope, ele, attrs, ctrl) {
         var box = angular.element(ele[0].querySelector('.checkbox'))
         ele.bind('click', function () {
@@ -66,6 +66,18 @@ define(['app'], function (app) {
     }
   })
 
+  app.directive('uiUp', function () {
+    return {
+      link: function (scope, ele, attrs) {
+        ele.bind('click', function () {
+          console.log(scope, ele, attrs)
+          scope.title="100000000"
+          document.dispatchEvent ? document.dispatchEvent(new Event("onDataUp")) : document.fireEvent(new Event("onDataUp"));
+        })
+      }
+    }
+  })
+
   app.directive('uiTest', function () {
     return {
       restrict: 'EA',
@@ -73,11 +85,10 @@ define(['app'], function (app) {
       transclude: true,
       templateUrl: './views/components/test.html',
       controller: function ($scope, $element, $attrs) {
-        $scope.testBtns = $attrs.testbtn
+        //$scope.testBtns = $attrs.testbtn
       },
       link: function (scope, element, attrs) {
-        scope.titles = attrs.title
-        console.log(attrs.title)
+       scope.titles = attrs.title
       }
     }
   })
@@ -89,6 +100,7 @@ define(['app'], function (app) {
     templateUrl: './views/components/com.html',
     controller: function ($scope) {
       this.name = 'ecitlm'
+      this.getName = '-----------------------'
     },
     controllerAs: 'userCtrl',
     bindings: {

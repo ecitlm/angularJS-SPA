@@ -4,7 +4,7 @@ define(['app', 'filters'], function (app, filters) {
     $scope.title = '欢迎使用angularJs'
     $scope.$parent.list.active = '1'
     $scope.testBtn = function () {
-      window.alert(1)
+      window.alert('子组建方法调用')
     }
   })
 })

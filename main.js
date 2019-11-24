@@ -30,7 +30,7 @@ require.config({
   priority: [
     'angular'
   ],
-  urlArgs: 'version=20190401'
+  urlArgs: 'version='+ String(new Date().getTime()).substring(0,6) // update every day
 })
 
 require(['angular',
