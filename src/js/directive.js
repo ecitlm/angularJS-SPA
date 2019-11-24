@@ -71,7 +71,6 @@ define(['app'], function (app) {
       link: function (scope, ele, attrs) {
         ele.bind('click', function () {
           console.log(scope, ele, attrs)
-          scope.title="100000000"
           document.dispatchEvent ? document.dispatchEvent(new Event("onDataUp")) : document.fireEvent(new Event("onDataUp"));
         })
       }
