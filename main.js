@@ -1,39 +1,38 @@
 require.config({
   baseUrl: '',
   paths: {
-    'angular': './src/js/lib/angular',
-    'uiRoute': './src/js/lib/angular-ui-router.min',
-    'routes': './src/js/routes',
-    'common': './src/js/common',
-    'filters': './src/js/filters',
-    'app': './src/js/app',
-    'directive': './src/js/directive',
-    'axios': './src/js/lib/axios.min',
-    '$api': './src/js/http',
-    'routeConfig': './src/js/routes.config'
+    angular: './src/js/lib/angular',
+    uiRoute: './src/js/lib/angular-ui-router.min',
+    routes: './src/js/routes',
+    common: './src/js/common',
+    filters: './src/js/filters',
+    app: './src/js/app',
+    directive: './src/js/directive',
+    axios: './src/js/lib/axios.min',
+    $api: './src/js/http',
+    routeConfig: './src/js/routes.config'
   },
   waitSeconds: 0,
   shim: {
-    'angular': {
-      'exports': 'angular'
+    angular: {
+      exports: 'angular'
     },
-    'uiRoute': {
+    uiRoute: {
       deps: ['angular']
     },
-    'routes': {
+    routes: {
       deps: ['uiRoute', 'routeConfig']
     },
-    'common': {
-      'exports': 'common'
+    common: {
+      exports: 'common'
     }
   },
-  priority: [
-    'angular'
-  ],
-  urlArgs: 'version='+ String(new Date().getTime()).substring(0,6) // update every day
-})
+  priority: ['angular'],
+  urlArgs: 'version=' + String(new Date().getTime()).substring(0, 6) // update every day
+});
 
-require(['angular',
+require([
+  'angular',
   'uiRoute',
   'app',
   'routes',
@@ -41,6 +40,7 @@ require(['angular',
   'filters',
   '$api',
   'directive'
+  // eslint-disable-next-line no-unused-vars
 ], function (angular, filters, $api, directive) {
-  angular.bootstrap(document, ['app'])
-})
+  angular.bootstrap(document, ['app']);
+});

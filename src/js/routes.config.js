@@ -1,8 +1,7 @@
-/* global define */
 define([], function () {
   return {
     routes: {
-      'index': {
+      index: {
         url: '/index?id&name',
         templateUrl: 'views/index/index.html',
         controller: 'IndexController',
@@ -10,7 +9,7 @@ define([], function () {
         auth: false,
         dependencies: 'views/index/index'
       },
-      'news': {
+      news: {
         url: '/news',
         templateUrl: 'views/news/news.html',
         controller: 'NewsController',
@@ -18,7 +17,7 @@ define([], function () {
         auth: false,
         dependencies: 'views/news/news'
       },
-      'mine': {
+      mine: {
         url: '/mine',
         templateUrl: 'views/mine/mine.html',
         controller: 'MineController',
@@ -26,7 +25,7 @@ define([], function () {
         auth: true,
         dependencies: 'views/mine/mine'
       },
-      'directive': {
+      directive: {
         url: '/directive',
         templateUrl: 'views/common/directive.html',
         controller: 'DirectiveController',
@@ -34,7 +33,6 @@ define([], function () {
         auth: true,
         dependencies: 'views/common/directive.js'
       }
-
     }
-  }
-})
+  };
+});

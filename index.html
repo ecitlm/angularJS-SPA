@@ -2,25 +2,23 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>requirejs_angularJs</title>
-  <meta name="viewport"
-    content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="./src/css/style.css">
-  <script src="https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js"></script>
+    <meta charset="UTF-8">
+    <title>requirejs_angularJs</title>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./src/css/style.css">
+    <script src="https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js"></script>
 
-  <script>
-    //var vConsole = new VConsole();
-  </script>
-  <script src="./src/js/lib/require.min.js" data-main="./main"></script>
+    <script>
+        //var vConsole = new VConsole();
+    </script>
+    <script src="./src/js/lib/require.min.js" data-main="./main"></script>
 </head>
 
 <body ng-controller="appController">
-  <div ng-include="'./views/common/nav.html'"></div>
-  <div ui-view class="conatiner">loading</div>
+    <div ng-include="'./views/common/nav.html'"></div>
+    <div ui-view class="conatiner">loading</div>
 
 
 </body>
 
 </html>
-

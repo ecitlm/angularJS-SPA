@@ -1,21 +1,25 @@
-/* global angular, define */
+/* eslint-disable no-unused-vars */
 define(['app', 'routeConfig'], function (app, routeConfig) {
-  app.config(function ($stateProvider, $urlRouterProvider, $controllerProvider) {
+  app.config(function (
+    $stateProvider,
+    $urlRouterProvider,
+    $controllerProvider
+  ) {
     app.loadJs = function (js) {
       return function ($rootScope, $q) {
-        var def = $q.defer()
-        var deps = []
-        angular.isArray(js) ? (deps = js) : deps.push(js)
+        var def = $q.defer();
+        var deps = [];
+        angular.isArray(js) ? (deps = js) : deps.push(js);
         require(deps, function () {
           $rootScope.$apply(function () {
-            def.resolve()
-          })
-        })
-        return def.promise
-      }
-    }
-    $urlRouterProvider.otherwise('/index')
-    var dir = './'
+            def.resolve();
+          });
+        });
+        return def.promise;
+      };
+    };
+    $urlRouterProvider.otherwise('/index');
+    var dir = './';
     angular.forEach(routeConfig.routes, function (route, path) {
       $stateProvider.state(path, {
         url: route.url,
@@ -26,10 +30,10 @@ define(['app', 'routeConfig'], function (app, routeConfig) {
         resolve: {
           deps: app.loadJs(dir + route.dependencies),
           params: function () {
-            return route.params || {}
+            return route.params || {};
           }
         }
-      })
-    })
-  })
-})
+      });
+    });
+  });
+});

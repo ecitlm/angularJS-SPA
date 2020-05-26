@@ -1,4 +1,3 @@
-/* global define angular */
 define(['app'], function (app) {
   // app.directive(name, function() {
   //   return {
@@ -23,34 +22,37 @@ define(['app'], function (app) {
   //   };
   // })
 
-  app.directive('iCheck', [function () {
-    return {
-      restrict: 'EA',
-      transclude: true,
-      require: 'ngModel',
-      replace: true,
-      template: '<div class="angular-icheck">\n<div class="checkbox"></div>\n<div class="label" ng-transclude></div>\n</div>',
-      link: function (scope, ele, attrs, ctrl) {
-        var box = angular.element(ele[0].querySelector('.checkbox'))
-        ele.bind('click', function () {
-          box.toggleClass('checked')
-          ctrl.$setViewValue(box.hasClass('checked'))
-        })
-        ctrl.$render = function () {
-          if (ctrl.$viewValue) {
-            box.addClass('checked')
-          } else {
-            box.removeClass('checked')
-          }
+  app.directive('iCheck', [
+    function () {
+      return {
+        restrict: 'EA',
+        transclude: true,
+        require: 'ngModel',
+        replace: true,
+        template:
+          '<div class="angular-icheck">\n<div class="checkbox"></div>\n<div class="label" ng-transclude></div>\n</div>',
+        link: function (scope, ele, attrs, ctrl) {
+          var box = angular.element(ele[0].querySelector('.checkbox'));
+          ele.bind('click', function () {
+            box.toggleClass('checked');
+            ctrl.$setViewValue(box.hasClass('checked'));
+          });
+          ctrl.$render = function () {
+            if (ctrl.$viewValue) {
+              box.addClass('checked');
+            } else {
+              box.removeClass('checked');
+            }
+          };
+          ctrl.$isEmpty = function (value) {
+            return value === false;
+          };
+          ctrl.$setViewValue(box.hasClass('checked'));
+          ctrl.$validate();
         }
-        ctrl.$isEmpty = function (value) {
-          return value === false
-        }
-        ctrl.$setViewValue(box.hasClass('checked'))
-        ctrl.$validate()
-      }
+      };
     }
-  }])
+  ]);
 
   app.directive('ngTest', function () {
     return {
@@ -59,23 +61,25 @@ define(['app'], function (app) {
       require: 'ngModel',
       replace: true,
       template: function (elements, attrs) {
-        var html = ''
-        html += '<div>' + attrs.name + '<span ng-transclude></span></div>'
-        return html
+        var html = '';
+        html += '<div>' + attrs.name + '<span ng-transclude></span></div>';
+        return html;
       }
-    }
-  })
+    };
+  });
 
   app.directive('uiUp', function () {
     return {
       link: function (scope, ele, attrs) {
         ele.bind('click', function () {
-          console.log(scope, ele, attrs)
-          document.dispatchEvent ? document.dispatchEvent(new Event("onDataUp")) : document.fireEvent(new Event("onDataUp"));
-        })
+          console.log(scope, ele, attrs);
+          document.dispatchEvent
+            ? document.dispatchEvent(new Event('onDataUp'))
+            : document.fireEvent(new Event('onDataUp'));
+        });
       }
-    }
-  })
+    };
+  });
 
   app.directive('uiTest', function () {
     return {
@@ -84,27 +88,29 @@ define(['app'], function (app) {
       transclude: true,
       templateUrl: './views/components/test.html',
       controller: function ($scope, $element, $attrs) {
+        console.log($scope, $element, $attrs);
         //$scope.testBtns = $attrs.testbtn
       },
       link: function (scope, element, attrs) {
-       scope.titles = attrs.title
+        scope.titles = attrs.title;
       }
-    }
-  })
+    };
+  });
 
   app.component('uiCom', {
     restrict: 'EA',
     transclude: true,
     require: 'ngModel',
     templateUrl: './views/components/com.html',
+    // eslint-disable-next-line no-unused-vars
     controller: function ($scope) {
-      this.name = 'ecitlm'
-      this.getName = '-----------------------'
+      this.name = 'ecitlm';
+      this.getName = '-----------------------';
     },
     controllerAs: 'userCtrl',
     bindings: {
       input: '=', // '<'数据单项传递，‘=’双向传递
       method: '&' // 绑定方法, 注意param, 它是可以像 bind 那样，放入不同阶层的 params
     }
-  })
-})
+  });
+});
